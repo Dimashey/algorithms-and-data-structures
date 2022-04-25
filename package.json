@@ -1,0 +1,23 @@
+{
+  "name": "algorithms-and-data-structures",
+  "version": "1.0.0",
+  "description": "",
+  "main": "types.js",
+  "scripts": {
+    "execute": "ts-node"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dimashey/algorithms-and-data-structures.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dimashey/algorithms-and-data-structures/issues"
+  },
+  "homepage": "https://github.com/Dimashey/algorithms-and-data-structures#readme",
+  "devDependencies": {
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.3"
+  }
+}

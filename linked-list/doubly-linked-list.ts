@@ -1,7 +1,9 @@
+import {Nullable} from "../types";
+
 class DoublyLinkedListNode<T> {
     public value: T
-    public next: DoublyLinkedListNode<T> | null
-    public prev: DoublyLinkedListNode<T> | null
+    public next: Nullable<DoublyLinkedListNode<T>>
+    public prev: Nullable<DoublyLinkedListNode<T>>
 
     constructor(value: T, next: DoublyLinkedListNode<T> | null = null, prev: DoublyLinkedListNode<T> | null = null) {
         this.value = value
@@ -13,17 +15,52 @@ class DoublyLinkedListNode<T> {
 type CheckingNodeFunction<T> = (node: DoublyLinkedListNode<T>) => boolean
 type NodeHandleFunction<T> = (node: DoublyLinkedListNode<T>) => void
 
-
 export class DoublyLinkedList<T> {
-    public head?: DoublyLinkedListNode<T>
-    public tail?: DoublyLinkedListNode<T>
+    public head: Nullable<DoublyLinkedListNode<T>>
+    public tail: Nullable<DoublyLinkedListNode<T>>
     public count: number
 
     constructor() {
         this.count = 0
+        this.head = null
+        this.tail = null
     }
 
     protected isEmpty = (): boolean => !(this.head && this.tail)
+
+    public removeHead = (): Nullable<T> => {
+        if (!(this.head && this.tail)) return null
+        if (!(this.head.next && this.tail.prev)) {
+            const head = this.head
+            this.head = null
+            this.tail = null
+
+            return head.value
+        }
+
+        const oldHead = this.head
+        this.head = this.head.next
+        this.head.prev = null
+
+        return oldHead.value
+    }
+
+    public removeTail = (): Nullable<T> => {
+        if (!(this.head && this.tail)) return null
+        if (!(this.head.next && this.tail.prev)) {
+            const tail = this.tail
+            this.head = null
+            this.tail = null
+
+            return tail.value
+        }
+
+        const oldTail = this.tail
+        this.tail = this.tail.prev
+        this.tail.next = null
+
+        return oldTail.value
+    }
 
     public addHead = (value: T): void => {
         const node = new DoublyLinkedListNode<T>(value, this.head, null)
@@ -132,15 +169,3 @@ export class SortedLinkedList extends DoublyLinkedList<number> {
         current.prev = node
     }
 }
-
-const linkedList = new SortedLinkedList()
-
-linkedList.addSorted(4)
-linkedList.addSorted(1)
-linkedList.addSorted(6)
-linkedList.addSorted(3)
-linkedList.addSorted(5)
-linkedList.addSorted(2)
-linkedList.addSorted(0)
-
-linkedList.forEach(node => console.log(node.value))
