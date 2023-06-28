@@ -12,9 +12,9 @@ export class Stack<T> {
 
     pop = (): Nullable<T> => this.store.dequeueHead()
 
-    pick = (): Nullable<T> => this.store.head?.value || null
+    top = (): Nullable<T> => this.store.head?.value || null
 
-    get count() {
-        return this.store.count
-    }
+    size = (): number => this.store.count
+
+    isEmpty = (): boolean => this.store.count === 0
 }

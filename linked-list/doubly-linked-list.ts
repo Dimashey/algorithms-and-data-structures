@@ -34,6 +34,7 @@ export class DoublyLinkedList<T> {
             const head = this.head
             this.head = null
             this.tail = null
+            this.count--
 
             return head.value
         }
@@ -41,6 +42,7 @@ export class DoublyLinkedList<T> {
         const oldHead = this.head
         this.head = this.head.next
         this.head.prev = null
+        this.count--
 
         return oldHead.value
     }
