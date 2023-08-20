@@ -12,12 +12,12 @@ export class Queue<T> {
 
     dequeue = (): Nullable<T> => this.store.dequeueHead()
 
-    get head() {
-        return this.store.head
-    }
+    front = () => this.store.head?.value
 
-    get count() {
-        return this.store.count
-    }
+    rear = () => this.store.tail?.value
+
+    isEmpty = () => this.store.count === 0
+
+    size = () => this.store.count
 }
 
